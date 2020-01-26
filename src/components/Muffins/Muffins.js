@@ -1,14 +1,27 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
+import { useSelector, useDispatch } from 'react-redux';
 import { selectMuffinsArray } from '../../redux/selectors';
 
 const Muffins = () => {
   const muffins = useSelector(selectMuffinsArray);
+  const dispatch = useDispatch();
 
   return (
     <ul>
       {muffins.map(muffin => {
-        return <li key={muffin.id}>{muffin.name}</li>;
+        const handleLike = () => {
+          dispatch({
+            type: 'muffins/like',
+            payload: { id: muffin.id }
+          });
+        };
+
+        return (
+          <li key={muffin.id}>
+            {muffin.name} <button onClick={handleLike}>Like</button>{' '}
+            <i>{muffin.likes}</i>
+          </li>
+        );
       })}
     </ul>
   );
