@@ -1,12 +1,27 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
-import { selectMuffinsArray } from '../../redux/selectors';
+import {
+  selectMuffinsArray,
+  selectMuffinsLoading,
+  selectMuffinsLoadError
+} from '../../redux/selectors';
+import { loadMuffins } from '../../redux/actions';
 
 const Muffins = () => {
   const muffins = useSelector(selectMuffinsArray);
+  const muffinsLoading = useSelector(selectMuffinsLoading);
+  const loadError = useSelector(selectMuffinsLoadError);
   const dispatch = useDispatch();
 
-  return (
+  useEffect(() => {
+    dispatch(loadMuffins());
+  }, []);
+
+  return muffinsLoading ? (
+    <p>Loading...</p>
+  ) : loadError ? (
+    <p>{loadError}</p>
+  ) : muffins.length ? (
     <ul>
       {muffins.map(muffin => {
         const handleLike = () => {
@@ -24,6 +39,8 @@ const Muffins = () => {
         );
       })}
     </ul>
+  ) : (
+    <p>Oh no! Muffins have finished!</p>
   );
 };
 
