@@ -4,8 +4,8 @@ import {
   selectMuffinsArray,
   selectMuffinsLoading,
   selectMuffinsLoadError
-} from '../../redux/selectors';
-import { likeMuffin, loadMuffins } from '../../redux/actions';
+} from '../../redux/muffins';
+import { likeMuffin, loadMuffins } from '../../redux/muffins';
 
 const Muffins = () => {
   const muffins = useSelector(selectMuffinsArray);
