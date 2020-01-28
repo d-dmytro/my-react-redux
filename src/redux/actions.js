@@ -1,3 +1,8 @@
+export const likeMuffin = muffinId => ({
+  type: 'muffins/like',
+  payload: { id: muffinId }
+});
+
 export const loadMuffins = () => async dispatch => {
   dispatch({
     type: 'muffins/load_request'

@@ -5,7 +5,7 @@ import {
   selectMuffinsLoading,
   selectMuffinsLoadError
 } from '../../redux/selectors';
-import { loadMuffins } from '../../redux/actions';
+import { likeMuffin, loadMuffins } from '../../redux/actions';
 
 const Muffins = () => {
   const muffins = useSelector(selectMuffinsArray);
@@ -25,10 +25,7 @@ const Muffins = () => {
     <ul>
       {muffins.map(muffin => {
         const handleLike = () => {
-          dispatch({
-            type: 'muffins/like',
-            payload: { id: muffin.id }
-          });
+          dispatch(likeMuffin(muffin.id));
         };
 
         return (
